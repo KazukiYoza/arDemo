@@ -6,19 +6,21 @@
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
 </head>
 <body style='margin: 0; overflow: hidden;'>
-<!-- ③ シーンを追加 -->
-<a-scene embedded arjs>
-  <!-- ④ マーカーを追加 ここから -->
-  <a-marker preset="hiro">
-    <!-- ⑤ オブジェクトの追加 -->
-    <a-sphere scale=".25 .25 .25" position="0 .5 0" color="#111">
-      <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
-      </a-animation>
-    </a-sphere>
-  </a-marker>
-
-  <!-- ⑥ カメラを追加 -->
-  <a-entity camera></a-entity>
+<!-- こっからA-Frame -->
+<a-scene embedded arjs="debugUIEnabled:false;trackingMethod:best;" vr-mode-ui="enabled: false">
+    <!-- オブジェクトファイルとマテリアルファイルを読み込む -->
+    <a-assets>
+        <a-asset-item id="sample-obj" src="ironman/IronMan.obj"></a-asset-item>
+        <a-asset-item id="sample-mtl" src="ironman/IronMan.mtl"></a-asset-item>
+    </a-assets>
+  <!-- こっからARの世界。マーカー上になにを展開するかを書く -->
+    <a-marker preset="hiro">
+        <a-obj-model id="sample" src="#sample-obj" mtl="#sample-mtl" position="0 0 0" scale="0.5 0.5 0.5" rotation="0 0 0"></a-obj-model>
+        <a-text value="Merry X'mas !！！" position="0 1.3 0" align="center"></a-text>
+    </a-marker>
+    <!-- arなのでこんな感じでカメラが必要らしい。 -->
+    <a-entity camera></a-entity>
 </a-scene>
+<!-- ここまででA-Frameおわり -->
 </body>
 </html>
